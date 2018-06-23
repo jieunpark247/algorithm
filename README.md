@@ -1,4 +1,3 @@
-<beakjoon & sw expert academy>
+##beakjoon & sw expert academy
 
-
-Coding (C++)
+**Algorithm (using C++)**
