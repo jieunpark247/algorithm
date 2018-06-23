@@ -46,7 +46,9 @@ if(..)
 
 	while (next_permutation(ind.begin(), ind.end())); 
 
-``` : 조합 만들기 
+
+```  
+: 조합 만들기 
 
 ```
 next_permutation;
