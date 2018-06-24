@@ -27,13 +27,9 @@ if(..)
 	for (int i = 0; i < vzero.size() - k; i++) {
 		ind.push_back(0);
 	}
-	sort(ind.begin(), ind.end()); //오름차순 정
+	sort(ind.begin(), ind.end()); //오름차순 정렬
 
-	do { //조합 돌리기
-
-		for (int i = 0; i < n; i++)
-			for (int j = 0; j < m; j++)
-				temp[i][j] = map[i][j]; //임시 map만들기
+	do { //순열 돌리기
 
 		for (int i = 0; i < ind.size(); i++) {
 			if (ind[i] == 1) {
@@ -50,13 +46,25 @@ if(..)
 ```  
 : 조합 만들기 
 
-```
-next_permutation;
 ```  
-:  순열 모두 만들기
+		
+	do { //순열  돌리기
+
+		for (int i = 0; i < ind.size(); i++) { 
+			if (ind[i] == 1) {
+				//ind는 순열을 돌릴 vector 값
+				temp[vzero[i].first][vzero[i].second] = 1;
+
+			}
+		}	
+	} 
+
+	while (next_permutation(ind.begin(), ind.end())); 
+
+```  
+:  순열 만들기
 
 ```
-sort();
+sort(v.begin(), v.end());  
 ```  
 :  오름차순 정렬
-
