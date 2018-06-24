@@ -1,3 +1,5 @@
+//숫자만들기
+//순열 next permutation 사용
 #include<iostream>
 #include<vector>
 #include<algorithm>
