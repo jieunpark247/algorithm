@@ -1,3 +1,7 @@
+# Object-c 와 Swift 의 차이점
+
+[Object-c vs Swift](https://academy.realm.io/kr/posts/from-objective-c-to-swift-ios-techtalk/)
+
 # App Life Cycle
 
 * Not Running
