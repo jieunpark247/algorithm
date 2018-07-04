@@ -18,3 +18,47 @@ ex> 문제 '특정 클래스가 실행간에 단 한번만 인스턴스화 되�
 ### 구현
 
 [singleton 패턴 구현](https://github.com/JaeYeopHan/Interview_Question_for_Beginner/tree/master/DesignPattern)
+
+## C++의 디자인 패턴_경량패턴
+
+하나의 클래스당 필요한 데이터가 너무 많고 크기도 클때, 1프레인에 GPU로 모두 전달하기에는 양이 너무 많다.  
+
+
+	class Tree {
+		private:
+		Mesh mesh; // 메시     
+		Texture bark; // 나무껍질 텍스처 
+		Texture leaves; // 잎사귀 텍스처 
+		Vector position;
+		double height;
+		double thickness;
+		Color barTint;
+		Color leafTint;
+	};
+
+이것을해결하기위해 ->  
+객체에 들어있는 데이터 대부분이 인스턴스별로 다르지 않다면?  그 객체를 반으로 쪼개어 명시적으로 모델링 할 수 있다.   
+
+모든 클래스가 다 같이 사용하는 데이터를 뽑아내 새로운 클래스를 만들 수 있다.   
+
+
+	class TreeModel {
+		private:
+			Mesh mesh;
+			Texture bark;
+			Texture leaves;
+	};
+
+그럼 이 TreeModel 객체는 하나만 존재하게 된다. 그 이후 각 인스턴스들은 공유객체인 TreeModel을 참조하기만 하면된다. 
+
+
+
+	class Tree {  
+	private: 
+		TreeModel * model;
+		Vector position; 
+		double height; 
+		double thickness; 
+		Color barkTint; 
+		Color leafTint; 
+	}
