@@ -6,9 +6,9 @@
 [chapter 6](#6장)  
 [chapter 7](#7장)  
 [chapter 8](#8장)  
-[chapter 9](#9-10장)  
-[chapter 10](#13-14장)  
-[chapter 11](#15-17장)  
+[chapter 9-10](#9-10장)  
+[chapter 13-14](#13-14장)  
+[chapter 15-17](#15-17장)  
 
 ## 1장
 ### **네트워크의 기초**
