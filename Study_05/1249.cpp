@@ -1,75 +1,60 @@
+//1249 보급로
+//using 다익스트라
 #include<iostream>
-#include<algorithm>
 #include<queue>
-#include<cstdio>
+#define MAX 987654321;
+
 using namespace std;
 int n;
-int time_;
 int map[101][101];
-int visited[101][101];
-int dx[] = { 1,-1,0,0 }; // 위 아 오 왼
-int dy[] = { 0,0,1,-1 };
+int map2[101][101];
+int dx[] = {0,-1 ,1,0 }; // 위 아 오 왼
+int dy[] = {-1,0, 0,1 };
 queue < pair < pair < int, int >, int> > q;
-
-//int nx, ny;
 
 void init_map() {
 	for (int i = 0; i < 100; i++)
 		for (int j = 0; j < 100; j++)
 			map[i][j] = 0;
 }
-
-void init_visited() {
+void init_map2() {
 	for (int i = 0; i < 100; i++)
 		for (int j = 0; j < 100; j++)
-			visited[i][j] = 0;
+			map2[i][j] = MAX;
 }
 
-void bfs() {
-	
-	q.push(make_pair(make_pair(0, 0), 0)); //  
-	visited[0][0] = 1;
+
+void solve() { //대각선 방향으로 보면서 숫자를 더해나감 , 겹치는 부분은 더 작은값을 집어넣음
+
+	q.push(make_pair(make_pair(0, 0), 0)); 
+
 
 	while (!q.empty()) {
-		
+
 		int x = q.front().first.first;
 		int y = q.front().first.second;
-		int cur_time= q.front().second;
-		visited[x][y] = 1;
-		q.pop();
+		int cur_time = q.front().second;
 
-		if (x == n - 1 && y == n - 1) {
-			cout << "last" << '\n';
-		//	cout << cur_time;
-			time_ = min(cur_time, time_);
+		q.pop();
+		if (cur_time > map2[x][y])
 			continue;
 
-		}
-
-		//temp = 987654321;
-
+	
 
 		for (int i = 0; i < 4; i++) {
 			int nx = x + dx[i];
 			int ny = y + dy[i];
-
+			int time = map[nx][ny];
 			if (nx >= 0 && nx < n && ny >= 0 && ny < n) {
-				if (visited[nx][ny] == 0 ) { //map nxny값이 최솟값time과 같으면?
-				//	visited[nx][ny] = 1;
-					q.push(make_pair(make_pair(nx, ny),cur_time+ map[nx][ny])); //push 해라
-					cout << "nx" << nx << " ny" << ny << '\n';
-					cout << cur_time + map[nx][ny] <<'\n';
+				if (cur_time+time<map2[nx][ny]) { //map2에 있는 값이 curtime + time 보다 크면? curtime+time을 집어넣는다.
+					map2[nx][ny] = cur_time + time; //map2값에 지금까지 시간고 + map에 있는 시간을 합한것을 집어넣는다.
+					q.push(make_pair(make_pair(nx, ny), map2[nx][ny])); //push 해라
 
-				}//if
-			}//if
-
-		
+				}
+			}
 		}//for
-		
-
 	}//while
-	
-} //bfs
+}
 
 
 int main() {
@@ -77,8 +62,8 @@ int main() {
 
 	cin >> testcase;
 	for (int t = 1; t <= testcase; t++) {
-		init_visited();
-			init_map();
+
+		init_map();
 
 		cin >> n;
 
@@ -86,12 +71,12 @@ int main() {
 			for (int j = 0; j < n; j++)
 				scanf_s("%1d", &map[i][j]);
 
-		time_ = 987654321;
-		bfs();
-		cout << "# " << t << " " << time_ << endl;
+		init_map2();
+		solve();
+		cout << "#" << t << " " << map2[n-1][n-1] << endl;
 
-	
-	
+
+
 	}
 	return 0;
 }
