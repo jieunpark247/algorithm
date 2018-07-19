@@ -1,7 +1,7 @@
 ## Firebase 
 
 ### 이점 
-
+[사진보기](http://zeddios.tistory.com/47)
 
 ![](/Users/PARKHASIK/Downloads/image.jpeg)
  
