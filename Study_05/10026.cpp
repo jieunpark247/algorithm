@@ -1,3 +1,11 @@
+//
+//  10026.cpp
+//  Project
+//
+//  Created by PARKHASIK on 2018. 7. 20..
+//  Copyright Â© 2018ë…„ PARKJIEUN. All rights reserved.
+//
+
 #include<iostream>
 #include<queue>
 #include<algorithm>
@@ -8,85 +16,103 @@ int n;
 //int cnt;
 int visited[101][101];
 char map[101][101];
-int count[10001];
+int count_[10001];
 queue < pair < int, int > > q;
 int dx[] = { 1,-1,0,0 };
 int dy[] = { 0,0,1,-1 };
 
 void BFS(int a, int b, int cnt) {
-	visited[a][b] = 1;
-	::count[cnt]++;
-	//q.push(make_pair(a, b));
-
-	while (!q.empty()) {
-		int x = q.front().first;
-		int y = q.front().second;
-		q.pop();
-
-		for (int i = 0; i < 4; i++) {
-			int nx = x + dx[i];
-			int ny = y + dy[i];
-			if (nx >= 0 && nx < n)
-				if (nx >= 0 && nx < n &&ny >= 0 && ny < n) {
-					if (visited[nx][ny] == 0 && map[nx][ny] == map[x][y]) //mapÀÌµ¿°ªÀÌ ÇöÀç°ª°ú °°´Ù¸é?
-					{
-						visited[nx][ny] = 1;
-						::count[cnt]++; // ‘p¹ø ÀÎÁö cntº°·Î ¼À 
-						q.push(make_pair(nx, ny));
-					}
-				}
-		} // ÇÑ¹ø À§¾Æ·¡ ¾ç¿· ¼¼Æ®·Î °¥¼ö ÀÖÀ½  
-		
-	}
-
+    
+    
+    visited[a][b] = 1;
+    count_[cnt]++;
+    //q.push(make_pair(a, b));
+    
+    while (!q.empty()) {
+        int x = q.front().first;
+        int y = q.front().second;
+        q.pop();
+        
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx >= 0 && nx < n)
+                if (nx >= 0 && nx < n &&ny >= 0 && ny < n) {
+                    if (visited[nx][ny] == 0 && map[nx][ny] == map[x][y]) //mapì´ë™ê°’ì´ í˜„ìž¬ê°’ê³¼ ê°™ë‹¤ë©´?
+                    {
+                        visited[nx][ny] = 1;
+                        count_[cnt]++; // Â‘pë²ˆ ì¸ì§€ cntë³„ë¡œ ì…ˆ
+                        q.push(make_pair(nx, ny));
+                    }
+                }
+        } // í•œë²ˆ ìœ„ì•„ëž˜ ì–‘ì˜† ì„¸íŠ¸ë¡œ ê°ˆìˆ˜ ìžˆìŒ
+        
+    }
+    
 }
 int main() {
-	int cnt = 0;
-	cin >> n;
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			cin >> map[i][j];
-		}
-	}
+    int cnt = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> map[i][j];
+        }
+    }
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if ((map[i][j] == 'R'|| map[i][j] == 'G'|| map[i][j] == 'B') && visited[i][j] == 0) {
+                q.push(make_pair(i, j));
+                cnt++;	//ì „ì²´ ëª¨ìž„ ê°¯ìˆ˜ ì„¸ê¸°
+                BFS(i, j, cnt);
+            }
+        }
+    } //ë„ˆëŠ” i j ì „ì²´ ë‹¤ëŒë¦¼ ëª¨ë“  ì¢Œí‘œ ë‹¤ëŒë¦¼ bfs í•œë²ˆ ëŒë©´ cntì—ì„œ +1ì”© í•´ì¤Œ ì „ì²´ ëª‡ë²ˆ ëŒì•˜ëŠ”ì§€ ì•Œ ìˆ˜ ìžˆë‹¤.
+    
+    cout << cnt << '\n';
+    //ì¼ë°˜ì¸
+ 
+    
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+        if(map[i][j]=='R')
+           map[i][j]='G';
 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			if ((map[i][j] == 'R'|| map[i][j] == 'G'|| map[i][j] == 'B') && visited[i][j] == 0) {
-				q.push(make_pair(i, j));
-				cnt++;	//ÀüÃ¼ ¸ðÀÓ °¹¼ö ¼¼±â
-				BFS(i, j, cnt);
-			}
-		}
-	} //³Ê´Â i j ÀüÃ¼ ´Ùµ¹¸² ¸ðµç ÁÂÇ¥ ´Ùµ¹¸² bfs ÇÑ¹ø µ¹¸é cnt¿¡¼­ +1¾¿ ÇØÁÜ ÀüÃ¼ ¸î¹ø µ¹¾Ò´ÂÁö ¾Ë ¼ö ÀÖ´Ù. 
-
-	cout << cnt << '\n'; 
-	//ÀÏ¹ÝÀÎ
-
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			if ((map[i][j] == 'R' || map[i][j] == 'G' || map[i][j] == 'B') && visited[i][j] == 0) {
-				q.push(make_pair(i, j));
-				cnt++;	//ÀüÃ¼ ¸ðÀÓ °¹¼ö ¼¼±â
-				BFS(i, j, cnt);
-			}
-		}
-	}
-
-	cout << cnt << '\n';
-
-
-
-	int temp;
-	for (int i = 0; i < cnt; i++) {
-		for (int j = 0; j + 1 < cnt; j++) {
-			if (::count[j] > ::count[j + 1]) {
-				temp = ::count[j];
-				::count[j] = ::count[j + 1];
-				::count[j + 1] = temp;
-			}
-
-		}
-	}
-
-	return 0;
+    
+    cnt=0;
+    
+    for(int i=0;i<10001;i++)
+        count_[i]=0;
+    
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            visited[i][j]=0; //ì´ˆê¸°í™”
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if ((map[i][j] == 'G' || map[i][j] == 'B') && visited[i][j] == 0) {
+                q.push(make_pair(i, j));
+                cnt++;	//ì „ì²´ ëª¨ìž„ ê°¯ìˆ˜ ì„¸ê¸°
+                BFS(i, j, cnt);
+            }
+        }
+    }
+    
+    cout << cnt << '\n';
+    
+    
+    
+    int temp;
+    for (int i = 0; i < cnt; i++) {
+        for (int j = 0; j + 1 < cnt; j++) {
+            if (count_[j] > count_[j + 1]) {
+                temp = count_[j];
+                count_[j] = count_[j + 1];
+                count_[j + 1] = temp;
+            }
+            
+        }
+    }
+    
+    return 0;
 }
