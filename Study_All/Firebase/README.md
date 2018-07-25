@@ -21,3 +21,8 @@ pod 'Firebase/Database'
 --> 이 기능들을 추가해줌
 
 ![](/Users/PARKHASIK/Downloads/image3.png)  
+
+
+	•	앱에서 FIRUser 개체로부터 사용자의 기본 프로필 정보를 가져올 수 있습니다. 사용자 관리를 참고하세요. 
+	•	Firebase 실시간 데이터베이스와 Cloud Storage 보안 규칙에서 auth 변수로부터 로그인한 사용자의 고유 사용자 ID를 가져온 후 이 ID를 통해 사용자의 데이터 액세스를 관리할 수 있습니다. 
+
