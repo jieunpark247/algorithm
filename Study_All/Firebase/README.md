@@ -8,9 +8,7 @@
 
 [실시간 데이터베이스](#실시간데이터베이스)
 
-
-
-## Firebase 이점 
+# Firebase이점
 
 
 
@@ -58,6 +56,8 @@ pod 'Firebase/Database'
 
 
 # APN구성
+
+
 
 ## FCM 에서 APN 구성			
 
@@ -230,6 +230,79 @@ APN을 통해 푸시 알림을 보내려면 다음이 필요합니다.
     }
   }
   ```
+
+  ## 데이터 보안
+
+  Firebase 데이터베이스 규칙은 데이터베이스에 대한 *선언적* 구성입니다. 즉, 제품 로직과 별도로 규칙이 정의됩니다. 이 방식은 여러 가지 장점을 갖습니다. 클라이언트가 보안 적용을 담당하지 않고, 구현 상의 버그로 인해 데이터의 보안이 침해되지 않으며, 가장 중요한 장점으로 데이터 보호를 위한 서버 등의 중간 관리 체계가 필요하지 않습니다.
+
+  ### 규칙 구조화
+
+  Firebase 데이터베이스 규칙은 JSON 문서에 포함된 자바스크립트와 유사한 표현식으로 구성됩니다. 규칙의 구조는 데이터베이스에 저장한 데이터의 구조를 따라야 합니다. 예를 들어 메시지 목록을 다음과 같은 형태의 데이터로 유지한다고 가정해 보겠습니다.
+
+  ```
+  {
+    "messages": {
+      "message0": {
+        "content": "Hello",
+        "timestamp": 1405704370369
+      },
+      "message1": {
+        "content": "Goodbye",
+        "timestamp": 1405704395231
+      },
+      ...
+    }
+  }
+  ```
+
+  규칙도 비슷한 구조를 가져야 합니다. 다음은 이 데이터 구조에 사용할 수 있는 규칙 세트의 예입니다.
+
+  ```
+  {
+    "rules": {
+      "messages": {
+        "$message": {
+          // only messages from the last ten minutes can be read
+          ".read": "data.child('timestamp').val() > (now - 600000)",
+  
+          // new messages must have a string content and a number timestamp
+          ".validate": "newData.hasChildren(['content', 'timestamp']) && newData.child('content').isString() && newData.child('timestamp').isNumber()"
+        }
+      }
+    }
+  }
+  ```
+
+  ### 보안 규칙의 유형
+
+  보안 적용을 위한 규칙에는 `.write`, `.read` 및 `.validate`의 3가지 유형이 있습니다. 각 유형의 간략한 용도는 다음과 같습니다.
+
+  | 규칙 유형     |                                                              |
+  | ------------- | ------------------------------------------------------------ |
+  | **.read**     | 사용자가 데이터를 읽을 수 있는 조건을 기술합니다.            |
+  | **.write**    | 사용자가 데이터를 쓸 수 있는 조건을 기술합니다.              |
+  | **.validate** | 값의 올바른 형식, 하위 속성을 갖는지 여부 및 데이터 유형을 정의합니다. |
+
+  > **참고:** 기본적으로는 액세스가 금지됩니다. 특정 경로나 상위 경로에 `.write` 또는 `.read` 규칙이 지정되지 않은 경우 액세스가 거부됩니다.
+
+  ### 사전 정의된 변수
+
+  보안 규칙 정의에서 몇 가지 유용한 사전 정의된 변수에 액세스할 수 있습니다. 아래 예제에서는 이들 중 대부분을 사용합니다. 다음은 이러한 변수에 대한 간단한 요약 및 해당 API 참조에 대한 링크입니다.
+
+  | 사전 정의된 변수 |                                                              |
+  | ---------------- | ------------------------------------------------------------ |
+  | **now**          | Linux 기점을 기준으로 하는 현재 시간(밀리초)입니다. SDK의 firebase.database.ServerValue.TIMESTAMP로 생성한 타임스탬프를 검증하는 데 특히 유용합니다. |
+  | **root**         | 작업 시도 전에 Firebase 데이터베이스에 존재한 루트 경로를 나타내는 [RuleDataSnapshot](https://firebase.google.com/docs/reference/security/database/?hl=ko#ruledatasnapshot_methods)입니다. |
+  | **newData**      | 작업 시도 후에 존재할 데이터를 나타내는 [RuleDataSnapshot](https://firebase.google.com/docs/reference/security/database/?hl=ko#ruledatasnapshot_methods)입니다. 새로 기록되는 데이터와 기존 데이터를 포함합니다. |
+  | **data**         | 작업 시도 전에 존재한 데이터를 나타내는 [RuleDataSnapshot](https://firebase.google.com/docs/reference/security/database/?hl=ko#ruledatasnapshot_methods)입니다. |
+  | **$ 변수**       | ID 및 동적 하위 키를 나타내는 데 사용되는 와일드카드 경로입니다. |
+  | **auth**         | 인증된 사용자의 토큰 페이로드를 나타냅니다.                  |
+
+  그외 더많은 정보는 
+
+  [데이터 보안](https://firebase.google.com/docs/database/security/securing-data?hl=ko)
+
+  에서 보기
 
   
 
