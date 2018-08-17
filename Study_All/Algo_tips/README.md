@@ -141,3 +141,98 @@ int dy[4] = { 0,-1,0,1 }; //이동할 때 쓰는 y 좌표
 ```
 
 int dx[4] = { -1,0,1,0 }; //이동할 때 쓰는 x 좌표  int dy[4] = { 0,-1,0,1 }; //이동할 때 쓰는 y 좌표int dx[4] = { -1,0,1,0 }; //이동할 때 쓰는 x 좌표  int dy[4] = { 0,-1,0,1 }; //이동할 때 쓰는 y 좌표
+
+int dx[4] = { -1,0,1,0 }; //이동할 때 쓰는 x 좌표  int dy[4] = { 0,-1,0,1 }; //이동할 때 쓰는 y 좌표int dx[4] = { -1,0,1,0 }; //이동할 때 쓰는 x 좌표  int dy[4] = { 0,-1,0,1 }; //이동할 때 쓰는 y 좌표
+
+
+
+## 9. memset , memcpy
+
+1. 
+
+```
+#include <string.h>
+
+void * memset (void * s, int c, size_t n);
+```
+
+memset 은 말 그대로 해당 영역의 memory 데이터를 c로 초기화 하는 것을 뜻한다.
+
+ 
+
+```
+int test1[5] ;  
+
+memset( test1, 0, 5, * sizeof(int) ) ;
+```
+
+>   int 형의 크기가 5인 배열에 값을 0으로 초기화 하는것
+
+
+
+```
+memset(visited, 0, sizeof(visited)); 
+```
+
+>  visited 배열을 visited 크기만큼 0으로 초기화 시킴 
+
+
+
+2. 
+
+```
+#include <string.h>
+
+void *memcpy(void *dest, const void *src, size_t n);
+		
+```
+
+memcpy의 경우 *dest의 값을 src의 값으로 복사하는 것을 뜻한다.
+
+이 경우도 count의 값 만큼 dest의 시작 메모리 주소값에서 부터 메모리 영역에 복사하는 것
+
+[memcpy](https://www.joinc.co.kr/modules/moniwiki/wiki.php/manSearch?google=none&name=memcpy)() 함수는 포인터 dest 를 반환한다.
+
+ex>
+
+```
+#include <unistd.h>
+
+#include <string.h>
+
+struct mydata
+{
+    int age;
+    int weight; 
+
+    char name[16];
+    char juso[80];
+};
+
+int main()
+{
+    struct mydata data;
+    struct mydata *mdata;
+    char f_data[120];
+    int my_weight;
+
+    data.age    = 29;
+    data.weight = 64;
+
+    strcpy(data.name, "yundream"); 
+    strcpy(data.juso, "seoul korea");
+
+    memset(f_data, 0x00, 120);
+    
+    // data 구조체를 f_data 로 메모리 복사한다.  
+    memcpy(f_data, (void *)&data, sizeof(struct mydata));
+
+    mdata = (void *)&f_data; 
+
+    printf("pcopy %d\n", mdata->age);
+
+    memcpy((void *)&my_weight, f_data+4, sizeof(int)); 
+
+    printf("%d\n", my_weight);
+} 
+```
