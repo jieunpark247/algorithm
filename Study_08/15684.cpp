@@ -1,112 +1,205 @@
-// ªÁ¥Ÿ∏Æ ¡∂¿€ 15684
+//
+//  15684.cpp
+//  Project
+//ÏÇ¨Îã§Î¶¨ Ï°∞Ïûë
 #include <iostream>
 #include<vector>
+#include<algorithm>
+#include <string.h>
 using namespace std;
 int M, N, H,a,b;
-int map[11][11],map2[11][11];
-int ans,res;
-int finishLadder[11];
+int map[31][11],map2[31][11],map3[31][11],visited[31][11],visited2[31][11];
+int ans;
+int finishLadder[12];
 int dx[4] = { -1,1,0, 0};
 int dy[4] = { 0, 0,1,-1};
 int nx, ny,nn;
 int cnt;
-void plusLadder(int times) { //ªÁ¥Ÿ∏Æ∏¶ ≥ıæ“¿ª ∂ß
-	vector<int> ind;
-
-	int k = times;
-
-	for (int i = 0; i < k; i++) {
-		ind.push_back(1);
-	}
-	for (int i = 0; i <  - k; i++) {
-		ind.push_back(0);
-	}
-	sort(ind.begin(), ind.end()); //ø¿∏ß¬˜º¯ ¡§∑ƒ
-
-	do { //º¯ø≠ µπ∏Æ±‚
-
-		for (int i = 0; i < ind.size(); i++) {
-			if (ind[i] == 1) {
-
-				
-
-			}
-		}
-	}
-
-	while (next_permutation(ind.begin(), ind.end()));
-
-
-
+int tt;
+void goLadder(int x,int y) { //ÏÇ¨Îã§Î¶¨Î•º ÌÉÄÍ≥† Í∞îÏùÑ Îïå Í≤∞Í≥ºÎ•º Ï∂úÎ†•
+    if (x > H) {
+        finishLadder[nn] = y;
+        return;
+    }
+    
+    
+    if (map3[x][y] == 1) {
+        nx = dx[1] + x;
+        ny = dy[1] + y;
+        
+    }else if (map3[x][y] == 2) {
+        nx = dx[2] + x;
+        ny = dy[2] + y;
+        if (nx <= H && ny <= N && nx > 0 && ny > 0)
+            map3[nx][ny] = 1;
+        
+        
+    }else if (map3[x][y] == 3) {
+        nx = dx[3] + x;
+        ny = dy[3] + y;
+        if (nx <= H && ny <= N && nx > 0 && ny > 0)
+            map3[nx][ny] = 1;
+    }
+    
+    
+    goLadder(nx,ny);
 }
-void goLadder(int x,int y) { //ªÁ¥Ÿ∏Æ∏¶ ≈∏∞Ì ∞¨¿ª ∂ß ∞·∞˙∏¶ √‚∑¬ 
-	if (x > M) {
-		finishLadder[nn] = y;
-		return;
-	}
 
-	
-	if (map2[x][y] == 1) {
-		nx = dx[1] + x;
-		ny = dy[1] + y;
+//h = x j=y
+void plusLadder(int times,int xx, int yy) { //ÏÇ¨Îã§Î¶¨Î•º ÎÜìÎäî Í≤ΩÏö∞Ïùò Ïàò Ï∂úÎ†•
+    cout<<"T"<<tt;
+    if (times > tt ){
+        for (int j = 1; j <= N; j++){
+            memcpy(map3, map2, sizeof(map2));
+            nn = j;
+            goLadder(1, j);
+        }
+//
+      
+          if(tt==3)
+          {
+//        for (int h = 1; h <= H; h++){
+//            cout<<'\n';
+//            for (int j = 1; j <= N; j++){
+//                cout<<map2[h][j];
+//            }} cout<<'\n';
+//        
+//        for (int h = 1; h <= H; h++){
+//            cout<<'\n';
+//            for (int j = 1; j <= N; j++){
+//                cout<<visited[h][j];
+//            }} cout<<'\n';
+        
+//            for (int h = 1; h <= H; h++){
+//                cout<<'\n';
+//                for (int j = 1; j <= N; j++){
+//                    cout<<visited2[h][j];
+//                }} cout<<'\n';
+//            
+        
+          }
+        
+        
+        
+        //fin[i] == i Í∞Ä ÎßûÎäîÏßÄ ÏÑ∏ÏÑú ÎßûÏúºÎ©¥ Î¶¨ÌÑ¥
+//        for (int f = 1; f <= N; f++){
+//            cout<<finishLadder[f]<<" ";
+//        }cout<<'\n';
+        int cn=0;
+        for (int f = 1; f <= N; f++)
+            if(finishLadder[f]==f)
+                cn=cn+1;
+        
+        if(cn==N){
+//            for (int h = 1; h <= H; h++){
+//                cout<<'\n';
+//                for (int j = 1; j <= N; j++){
+//                    cout<<map2[h][j];
+//                }} cout<<'\n';
+            
+                  //  cout<<times;
+            ans=tt;
+        }
+        
+  
+        
+        return;
+    }
+    
+    
+    
+    
+    visited[xx][yy]=1;
+    map2[xx][yy]=2;
+    map2[xx][yy+1]=3;
+    
+    
+    if(tt==3)
+    {
+                for (int h = 1; h <= H; h++){
+                    cout<<'\n';
+                    for (int j = 1; j <= N; j++){
+                        cout<<map2[h][j];
+                    }} cout<<'\n';
+        
+                for (int h = 1; h <= H; h++){
+                    cout<<'\n';
+                    for (int j = 1; j <= N; j++){
+                        cout<<visited[h][j];
+                    }} cout<<'\n';
+        
+        for (int h = 1; h <= H; h++){
+            cout<<'\n';
+            for (int j = 1; j <= N; j++){
+                cout<<visited2[h][j];
+            }} cout<<'\n';
+        
+        
+    }
+    
+    
+    for (int h = 1; h <= H; h++){
+        for (int j = 1; j <= N; j++){
+            if(j+1<=N && map2[h][j]==1 && map2[h][j+1]==1&&visited[h][j]==0 &&times>0 &&visited2[h][j]==0){
+ 
+                
+                plusLadder(times+1,h,j);
+                
+                times=times-1;
+                map2[xx][yy]=1;
+                map2[xx][yy+1]=1;
+                
+             
 
-	}else if (map2[x][y] == 2) {
-		nx = dx[2] + x;
-		ny = dy[2] + y;
-		if (nx <= N && ny <= M && nx > 0 && ny > 0)
-			map2[nx][ny] = 1;
+                
+            }}}
+    
 
-	}else if (map2[x][y] == 3) {
-		nx = dx[3] + x;
-		ny = dy[3] + y;
-		if (nx <= N && ny <= M && nx > 0 && ny > 0)
-			map2[nx][ny] = 1;
-	}
-
-	
-	goLadder(nx,ny);
+    
 }
+
 int main() {
-	ans = -1;
-	res = 0;
-	cin >> N >> M>> H;
-	for (int i = 1; i <= M; i++)
-		for (int j = 1; j <= N; j++)
-			map[i][j]=1;
+    ans = -1;
 
-	for (int m = 0; m < M; m++) {
-		cin >> a >> b;
-		map[a][b] = 2; //go to right
-		map[a][b + 1] = 3; // go to left
+    cin >> N >> M>> H;
+    for (int i = 1; i <= H; i++)
+        for (int j = 1; j <= N; j++)
+            map[i][j]=1;
+    
+    for (int m = 0; m < M; m++) {
+        cin >> a >> b;
+        map[a][b] = 2; //go to right
+        map[a][b + 1] = 3; // go to left
+        visited[a][b]=1;
+        visited[a][b+1]=1;
+        
+    }
+    
+  
+  
+   // plusLadder(0,1,1);
+    
+    for(int t=0;t<=3;t++){
+        tt=t;
+        memset(visited2, 0, sizeof(visited2));
+    for (int h = 1; h <= H; h++){
+        for (int j = 1; j <= N; j++){
+             memcpy(map2, map, sizeof(map));
+            memset(visited, 0, sizeof(visited));
 
-	}
+     
+                if(j+1<=N && map2[h][j]==1 && map2[h][j+1]==1){
+                  
+                    plusLadder(1,h,j);
+                }
+            
+               visited2[h][j]=1;
+        }}
+        
+       if(ans>=0)
+           break;
+    }
 
-	if (H > 3)
-		H = 3;
-	for (int h = 1; h <= H; h++)
-		plusLadder(h);
-
-
-
-	for (int j = 1; j <= N; j++){
-
-		for (int i = 1; i <= M; i++)
-			for (int j = 1; j <= N; j++)
-				map2[i][j] = map[i][j];
-		nn = j;
-		goLadder(1, j);
-
-	}
-	for (int j = 1; j <= N; j++) 
-		cout <<"("<< j<<" : "<< finishLadder[j] << ")";
-	
-	for (int j = 1; j <= N; j++) {
-		if (finishLadder[j] != j)
-			res = -1;
-	}
-
-	if (res != -1)
-		ans = cnt;
-
-	//cout << ans << endl;
+    
+    cout << ans << endl;
 }
