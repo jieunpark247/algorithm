@@ -27,7 +27,9 @@ continue;
 
 ## 2. 재귀
 
-재귀를 쓸 때 안끝난 채로 재귀에 들어가기 때문에 조건에 부합하지 않아 함수가 끝난다면 다른 경우의 수를 수행하게끔 **백트래킹**을 하여 경우의 수가 끝날 때 까지 수행한다.
+재귀를 쓸 때 안끝난 채로 재귀에 들어가기 때문에 조건에 부합하지 않아 함수가 끝난다면 다른 경우의 수를 수행하게끔 **백트래킹**을 하여 경우의 수가 끝날 때 까지 수행한다. 
+
+초기화 할때 재귀돌아가는 곳 안에 할것인지 아닌지 잘 살펴보기 
 
 ## 3. 순열과 조합 
 
@@ -66,18 +68,32 @@ continue;
 
 ```  
 		
-	do { //순열  돌리기
+	   vector<int> ind;
+        
+        int k = ...;
+        
+        for (int i = 0; i < ...; i++) {
+            ind.push_back(1);
+        }
+        for (int i = 0; i < ///// - ....; i++) {
+            ind.push_back(0);
+        }
+        sort(ind.begin(), ind.end(),greater<int>());
+        
+        do { //순열 돌리기
+          
+            for (int i = 0; i < ind.size(); i++) {
+                if (ind[i] == 1) {
+                  
+                    
+                }
+            }
+          
+            
+        }
+        
+        while (next_permutation(ind.begin(), ind.end(),greater<int>()));
 
-		for (int i = 0; i < ind.size(); i++) { 
-			if (ind[i] == 1) {
-				//ind는 순열을 돌릴 vector 값
-				.....
-
-			}
-		}	
-	} 
-
-	while (next_permutation(ind.begin(), ind.end())); 
 
 ```
 :  순열 만들기
@@ -86,8 +102,9 @@ continue;
 
 ```
 sort(v.begin(), v.end());  
+sort(ind.begin(), ind.end(),greater<int>());
 ```
-:  오름차순 정렬
+:  오름차순 정렬 , 내림차순
 
 ## 4. 공백없는 입력
 
@@ -125,7 +142,7 @@ vector < pair < pair < int, int >, int > > v;
 ## 7. enum
 
 ```
-enum { PATH = 1 }; 
+enum { PATH = 1 ,...}; 
 ```
 
  
@@ -236,3 +253,27 @@ int main()
     printf("%d\n", my_weight);
 } 
 ```
+## 10. 알파벳 -> 숫자
+
+```
+s[0] - 'A' 
+```
+
+
+
+## 11. #include <string>
+
+```
+string s  
+
+cin>>s;  //벡터처럼 배열에 저장 
+```
+
+![스크린샷 2018-08-27 오후 10.10.48](/Users/PARKHASIK/Desktop/스크린샷 2018-08-27 오후 10.10.48.png)
+
+![스크린샷 2018-08-27 오후 10.10.59](/Users/PARKHASIK/Desktop/스크린샷 2018-08-27 오후 10.10.59.png)
+
+![스크린샷 2018-08-27 오후 10.11.11](/Users/PARKHASIK/Desktop/스크린샷 2018-08-27 오후 10.11.11.png)
+
+![스크린샷 2018-08-27 오후 10.11.21](/Users/PARKHASIK/Desktop/스크린샷 2018-08-27 오후 10.11.21.png)
+
