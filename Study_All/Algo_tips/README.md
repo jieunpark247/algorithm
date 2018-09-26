@@ -308,3 +308,19 @@ for(int jj=0;jj<number_pwd.size();jj++){
             //long (16진수 수가 크기때문)형으로 10진수로 변환
 ```
 
+
+
+## 14. is_Range()
+
+```
+bool is_range(int x, int y){
+
+    return(x>=0&&x<n&&y>=0&&y<n);
+
+} //이 범위 안이면 리턴
+```
+
+
+
+## 15.
+
