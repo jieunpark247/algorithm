@@ -277,3 +277,34 @@ cin>>s;  //벡터처럼 배열에 저장
 
 ![스크린샷 2018-08-27 오후 10.11.21](/Users/PARKHASIK/Desktop/스크린샷 2018-08-27 오후 10.11.21.png)
 
+
+
+## 12. char  string 변환
+
+```
+string oneN; 
+
+for(int jj=0;jj<number_pwd.size();jj++){
+
+           numn[jj]=number_pwd[jj]; //number_pwd는 벡터배열
+
+        }
+
+ oneN=numn;
+
+//벡터char배열에서 string 으로는 변환 불가능 
+그래서 char형 배열에서 string 값으로 변환 
+```
+
+
+
+## 13. 16진수 10진수 변환
+
+```
+   char *s = (char*) oneN.c_str();
+                  // ----string 형을 char포인터로 바꾼다.
+
+   long aa = strtol(s, NULL, 16);
+            //long (16진수 수가 크기때문)형으로 10진수로 변환
+```
+
