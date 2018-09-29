@@ -365,3 +365,118 @@ int main()
  
 
 ## 17. for문 
+
+```
+nt array[5] = { 9, 7, 5, 3, 1 }; 
+
+for (auto element: array) // element will be a copy of the current array element 
+
+std::cout << element << ' '; 
+```
+
+
+
+## 18. string-> int 변환 
+
+**1) 함수 설명**
+
+- **int atoi (const char \* str)**
+  헤더파일(C) : <stdlib.h>
+  헤더파일(CPP) : <cstdlib>
+  설명 : C style의 문자열을 입력받아서 int (숫자) 타입으로 변환하여 리턴한다.
+
+- **std::string c_str()** 
+  반환형이 char * 이므로, 해당하는 string의 첫번재 문자의 주소값(포인터)를 반환합니다.
+  사용방법은 아래에 나와있습니다.
+
+  
+
+  **{Test 1} char\* --> string** 
+
+   : C style의 char * 형을 C++ style의 string 으로 변환.
+
+  ```
+  char * cStr = "Cstring";
+  string cppStr = cStr;
+   
+  cout << "[test1] : char * --> string " << endl;
+  cout << "==> cppStr : " << cppStr << endl << endl;
+  ```
+
+  Test 1 : 결과
+
+  ![img](https://t1.daumcdn.net/cfile/tistory/2629DF3859632F9814)
+
+  
+
+  
+
+  **{Test 2} string --> char \***
+
+    : C++의 string을 C style의 char * 형으로 변환.
+
+  ```
+  string cppStr = "CPPstring";
+  const char * cStr2 = cppStr.c_str();
+  
+  
+  cout << "[test2] : string --> char *" << endl;
+  printf("==> printf > cStr2 : %s\n", cStr2);
+  cout << "==> cout > cStr2 : " << cStr2 << endl << endl;
+  ```
+
+  
+
+  Test 2 : 결과
+
+  ![img](https://t1.daumcdn.net/cfile/tistory/250E7D35596330671F)
+
+  
+
+  
+
+  **{Test 3} char \* --> int**
+
+    : C style의 char * 를 int 타입으로 변환.
+
+  ```
+  char * cStr = "20170711";
+  int num = atoi(cStr);
+  
+  printf("printf : %d\n", ++num);  //증가 후 출력.
+  cout <<"cout : "<< ++num << endl;//증가 후 출력.
+  ```
+
+  
+
+  Test 3 : 결과
+
+  ![img](https://t1.daumcdn.net/cfile/tistory/26016E485963327529)
+
+   
+
+  
+
+  **{Test 4} string --> char \* --> int (한번에 int로 변환)**
+
+    : C++의 string을 int 타입으로 한번에 변환.
+
+  ```
+  string s = "2017";
+  int num = atoi(s.c_str());
+  
+  printf("printf : %d\n", ++num);     //증가 후 출력
+  cout << "cout : " << ++num << endl; //증가 후 출력.
+  ```
+
+  
+
+  Test 4 : 결과
+
+  ![img](https://t1.daumcdn.net/cfile/tistory/2633904A5963328829)
+
+   
+
+   
+
+  
