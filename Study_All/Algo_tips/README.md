@@ -477,6 +477,14 @@ std::cout << element << ' ';
 
    
 
-   
+   ## 19. 아스키코드 A -> 0 변환
+
+  ```
+   cin >> A;
+   int Aa = A - 65;
+   cout<< Aa;
+  ```
+
+  
 
   
