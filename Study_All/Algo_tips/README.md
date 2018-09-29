@@ -322,5 +322,15 @@ bool is_range(int x, int y){
 
 
 
-## 15.
+## 15. 엔터입력시 종료
+
+```
+  do {
+
+        scanf("%d", &va);
+
+    } while (getc(stdin) == ' ');
+
+
+```
 
