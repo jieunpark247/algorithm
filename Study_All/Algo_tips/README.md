@@ -16,7 +16,7 @@
 
 [9. memset , memcpy ](#9)
 
-[11. #includ <string> ](#11)
+[11. string ](#11)
 
 [12. char  string 변환 ](#12)
 
