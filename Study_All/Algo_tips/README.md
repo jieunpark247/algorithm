@@ -40,11 +40,13 @@
 
 [22.명시적 형 변환 (Explict type conversion)](#22)
 
+[23.Switch](#23)
+
 
 
 # 1
 
-## if return,continue 사용법
+### if return,continue 사용법
 
 ```
 if(..)  
@@ -75,13 +77,15 @@ continue;
 
 # 2
 
-## 재귀
+### 재귀
 
 재귀를 쓸 때 안끝난 채로 재귀에 들어가기 때문에 조건에 부합하지 않아 함수가 끝난다면 다른 경우의 수를 수행하게끔 **백트래킹**을 하여 경우의 수가 끝날 때 까지 수행한다. 
 
 초기화 할때 재귀돌아가는 곳 안에 할것인지 아닌지 잘 살펴보기 
 
-## 3. 순열과 조합 
+# 3 
+
+###  순열과 조합 
 
 ```
 
@@ -170,7 +174,7 @@ scanf_s("%1d",&map[i][j])
 
 # 5
 
-## max,min(define) 선언
+### max,min(define) 선언
 
 ```
 #define max(a,b) (a < b ? a : b)
@@ -184,7 +188,7 @@ scanf_s("%1d",&map[i][j])
 
 # 6
 
-##  vector 여러가지 선언 방법 (2,3차원 등)
+###  vector 여러가지 선언 방법 (2,3차원 등)
 
 ```
 vector <  int  > v;
@@ -200,7 +204,7 @@ vector < pair < pair < int, int >, int > > v;
 
 # 7
 
-##  enum
+###  enum
 
 ```
 enum { PATH = 1 ,...}; 
@@ -467,7 +471,7 @@ int main()
 
 # 8 
 
-##  이동 좌표 
+###  이동 좌표 
 
 int dx[4] = { -1,0,1,0 }; //이동할 때 쓰는 x 좌표  int dy[4] = { 0,-1,0,1 }; //이동할 때 쓰는 y 좌표
 
@@ -485,7 +489,7 @@ int dx[4] = { -1,0,1,0 }; //이동할 때 쓰는 x 좌표  int dy[4] = { 0,-1,0,
 
 ## 9.
 
-##  memset , memcpy
+###  memset , memcpy
 
 1. 
 
@@ -579,7 +583,7 @@ int main()
 
 # 10
 
-##  알파벳 -> 숫자
+###  알파벳 -> 숫자
 
 ```
 s[0] - 'A' 
@@ -589,7 +593,7 @@ s[0] - 'A'
 
 # 11
 
-##  #include <string>
+###  #include <string>
 
 ```
 string s  
@@ -597,19 +601,252 @@ string s
 cin>>s;  //벡터처럼 배열에 저장 
 ```
 
-![스크린샷 2018-08-27 오후 10.10.48](/Users/PARKHASIK/Desktop/스크린샷 2018-08-27 오후 10.10.48.png)
 
-![스크린샷 2018-08-27 오후 10.10.59](/Users/PARKHASIK/Desktop/스크린샷 2018-08-27 오후 10.10.59.png)
 
-![스크린샷 2018-08-27 오후 10.11.11](/Users/PARKHASIK/Desktop/스크린샷 2018-08-27 오후 10.11.11.png)
+C++의 문자열을 사용하려면 먼저 `std::string`에 대한 선언을 가져오기 위해 `<string>` 헤더 파일을 `#include`해야 한다. 이 작업이 완료되면 `std::string` 타입의 변수를 정의할 수 있다.
 
-![스크린샷 2018-08-27 오후 10.11.21](/Users/PARKHASIK/Desktop/스크린샷 2018-08-27 오후 10.11.21.png)
+```
+#include <string>
+
+std::string myName;
+```
+
+일반 변수와 마찬가지로, 다음과 같이 값을 초기화하거나 문자열 값을 할당할 수 있다.
+
+```
+std::string myName("Alex"); // initialize myName with string literal "Alex"
+myName = "John";            // assign variable myName the string literal "John"
+```
+
+문자열에는 숫자도 포함할 수 있다.
+
+```
+std::string myID("45"); // "45" is not the same as integer 45!
+```
+
+문자열 형식에서 숫자는 숫자가 아닌 텍스트로 처리되므로 숫자처럼 조작할 수 없다. (Ex. 곱하기, 더하기 등) C++는 문자열 숫자를 정수 또는 부동 소수 점 값으로 자동 변환하지 않는다.
+
+------
+
+#### 문자열 입력 및 출력 (String input and output)
+
+`std::cout`을 사용하여 문자열을 예상대로 출력할 수 있다.
+
+```
+#include <string>
+#include <iostream>
+
+int main()
+{
+    std::string myName("Alex");
+    std::cout << "My name is: " << myName;
+
+    return 0;
+}
+
+// My name is: Alex
+```
+
+그러나 `std:cin`과 함께 문자열을 사용하면 놀랄 일이 발생할 수 있다!
+
+```
+#include <string>
+#include <iostream>
+
+int main()
+{
+    std::cout << "Enter your full name: ";
+    std::string name;
+    std::cin >> name; // this won't work as expected since std::cin breaks on whitespace
+
+    std::cout << "Enter your age: ";
+    std::string age;
+    std::cin >> age;
+
+    std::cout << "Your name is " << name << " and your age is " << age;
+}
+```
+
+```
+Enter your full name: Boy Coding
+Enter your age: 27
+Your name is Boy and your age is Coding
+```
+
+무슨 일일까? 연산자 `>>`를 사용하여 cin에서 문자열을 추출할 때, `>>`는 첫 번째 공백까지만 반환한다. 다른 모든 문자는 cin 내부에 남겨져 다음 추출을 기달린다.
+
+따라서 연산자 `>>`를 사용하여 문자열을 변수 `name`으로 추출할 때 "Boy"만 추출되어 std::cin 내에 "Coding"가 남겨져 다음 추출을 기다린다. `>>` 연산자를 다시 사용하여 변수 `age`에 문자열을 추출하면 "27" 대신 "Coding"가 나타난다. 세 번째 추출을 수했한다면 "27"을 얻게 될 것이다.
+
+------
+
+#### std::getline()을 사용한 텍스트 입력 (Use std::getline() to input text)
+
+문자열 전체를 읽으려면 `std::getline()` 함수를 사용하는 것이 좋다. `std::getline()`은 두 개의 매개 변수가 있다. 첫 번째 매개 변수는 `std::cin`이고, 두 번째 매개 변수는 `std::string` 변수다.
+
+```
+#include <string>
+#include <iostream>
+
+int main()
+{
+    std::cout << "Enter your full name: ";
+    std::string name;
+    std::getline(std::cin, name); // read a full line of text into name
+
+    std::cout << "Enter your age: ";
+    std::string age;
+    std::getline(std::cin, age); // read a full line of text into age
+
+    std::cout << "Your name is " << name << " and your age is " << age;
+}
+```
+
+```
+Enter your full name: Boy Coding
+Enter your age: 27
+Your name is Boy Coding and your age is 27
+```
+
+#### Mixing std::cin and std::getline()
+
+std::cin과 std::getline을 모두 사용하여 입력을 받으면 예기치 않은 동작이 발생할 수 있다.
+
+```
+#include <string>
+#include <iostream>
+
+int main()
+{
+    std::cout << "Pick 1 or 2: ";
+    int choice { 0 };
+    std::cin >> choice;
+
+    std::cout << "Now enter your name: ";
+    std::string name;
+    std::getline(std::cin, name);
+
+    std::cout << "Hello, " << name << ", you picked " << choice << '\n';
+
+    return 0;
+}
+
+// pick 1 or 2: 2
+// Now enter your name: Hello, , you picked 2
+```
+
+위 프로그램은 먼저 1이나 2를 입력하도록 요청하고 입력할 때까지 기다린다. 그러면 입력을 하고 난 뒤 이름을 입력해야 한다. 하지만 실제로는 이름을 입력할 때까지 기다리지 않는다! 대신 "Hello" 라인을 출력한 다음 종료한다. 무슨 일일까?
+
+`cin`을 사용하여 숫자 값을 입력하면 `cin`은 숫자 값만 캡처할 뿐만 아니라 "\n"도 캡처한다. 그럼 `cin`은 실제로 "2\n" 문자열을 얻는다. 그런 다음 숫자 값 2를 추출해서 `choice` 변수에 할당한다. 그러면 `getline()` 함수가 이름을 읽으러 갈 때 스트림에 "\n"이 남아있는 걸 보고 빈 문자열을 입력받았다고 생각하여 `name` 변수에 빈 문자열을 할당한다. 의도했던 결과가 아니다!
+
+`std:cin`으로 숫자 값을 읽은 후 스트림에서 "\n"을 제거하는 것이 좋다.
+
+```
+std::cin.ignore(32767, '\n'); // ignore up to 32767 characters until a \n is removed
+```
+
+`choice` 변수를 읽은 직후에 위 코드를 삽입하면, 관련 없는 개행이 스트림에서 제거되고 프로그램이 예상대로 작동한다!
+
+```
+int main()
+{
+    std::cout << "Pick 1 or 2: ";
+    int choice { 0 };
+    std::cin >> choice;
+
+    std::cin.ignore(32767, '\n'); // ignore up to 32767 characters until a \n is removed
+
+    std::cout << "Now enter your name: ";
+    std::string name;
+    std::getline(std::cin, name);
+
+    std::cout << "Hello, " << name << ", you picked " << choice << '\n';
+
+    return 0;
+}
+// pick 1 or 2: 2
+// Now enter your name: Boy Coding
+// Hello, Boycoding, you picked 2
+```
+
+`std:cin`이 포함된 숫자 값을 읽는 경우, `std:cin.ignore()`를 사용하여 관련 없는 새 라인을 제거하는 것이 좋다.
+
+
+
+##### 매직 넘버 32767은 무엇을 의미할까?
+
+32767은 cin::ignore() 함수가 무시할 문자 수다. 이 숫자는 모든 플랫폼에서 2-byte 정수의 가장 큰 값이다.
+
+기술적으로 무제한 입력을 무시하는 올바른 방법은 다음과 같다.
+
+```
+#include <limits>
+
+// ...
+
+std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore unlimited characters until a \n is removed
+```
+
+그러나 위 코드는 길뿐만 아니라 헤더 파일까지 포함해야 한다. 대부분은 버퍼링 된 입력을 두 줄 이상 무시할 필요가 없으므로 32767을 사용하는 게 실용적이다.
+
+------
+
+#### 문자열 추가 (Appending strings)
+
+연산자 `+`을 사용해서 두 문자열을 연결하거나 연산자 `+=`를 사용해서 한 문자열을 다른 문자열에 추가할 수 있다.
+
+```
+#include <string>
+#include <iostream>
+
+int main()
+{
+    std::string a("45");
+    std::string b("11");
+
+    std::cout << a + b << "\n"; // a and b will be appended, not added
+    a += " volts";
+    std::cout << a;
+
+    return 0;
+}
+
+// 4511
+// 45 volts
+```
+
+연산자 +는 문자열 "45"와 "11"을 "4511"로 연결한다. 숫자처럼 더하지 않는다.
+
+------
+
+#### 문자열 길이 (String length)
+
+문자열의 길이를 알고 싶으면 length() 멤버 함수를 통해 문자열의 길이를 요청할 수 있다.
+
+```
+#include <string>
+#include <iostream>
+int main()
+
+{
+    std::string myName("Alex");
+    std::cout << myName << " has " << myName.length() << " characters\n";
+    return 0;
+}
+
+// Alex has 4 characters
+```
+
+문자열 길이를 알려면 `length(myName)` 대신 `myName.length()`를 사용한다.
+
+length() 함수는 지금까지 사용한 것처럼 일반적인 함수가 아니며, 멤버 함수라는 std::string에 속하는 특별한 유형의 함수다. 나중에 멤버 함수에 대해 자세히 설명할 예정이다.
+
+
 
 
 
 # 12
 
-##  char  string 변환
+###  char  string 변환
 
 ```
 string oneN; 
@@ -630,7 +867,7 @@ for(int jj=0;jj<number_pwd.size();jj++){
 
 # 13
 
-##  16진수 10진수 변환
+###  16진수 10진수 변환
 
 ```
    char *s = (char*) oneN.c_str();
@@ -644,7 +881,7 @@ for(int jj=0;jj<number_pwd.size();jj++){
 
 # 14
 
-##  is_Range()
+###  is_Range()
 
 ```
 bool is_range(int x, int y){
@@ -658,7 +895,7 @@ bool is_range(int x, int y){
 
 # 15
 
-##  엔터입력시 종료
+###  엔터입력시 종료
 
 ```
   do {
@@ -674,7 +911,7 @@ bool is_range(int x, int y){
 
 # 16
 
-##  goto문
+###  goto문
 
 ```
 #include <stdio.h>  
@@ -706,7 +943,7 @@ int main()
 
 # 17
 
-##  for문 
+###  for문
 
 ```
 nt array[5] = { 9, 7, 5, 3, 1 }; 
@@ -720,7 +957,7 @@ std::cout << element << ' ';
 
 # 18 
 
-##  string-> int 변환 
+###  string-> int 변환 
 
 **1) 함수 설명**
 
@@ -825,7 +1062,7 @@ std::cout << element << ' ';
 
   # 19
 
-  ##  아스키코드 A -> 0 변환
+  ###  아스키코드 A -> 0 변환
 
   ```
    cin >> A;
@@ -837,7 +1074,7 @@ std::cout << element << ' ';
 
 # 20
 
-##  for 문
+###  for 문
 
 ```
 #include <iostream>
@@ -943,7 +1180,7 @@ int main()
 
 # 21
 
-##  auto
+###  auto
 
 #### C++ 11에서 타입 추론 (Type inference in C++ 11)
 
@@ -1023,7 +1260,7 @@ auto add(int x, int y)
 
 # 22
 
-##  명시적 형 변환 (Explict type conversion)
+###  명시적 형 변환 (Explict type conversion)
 
 이전 포스트 '[05.01 - 암시적 형 변환 (Implict type conversion)](http://boycoding.tistory.com/176?category=1008283)'에서 컴파일러가 어떤 경우 자료형 간의 값을 암시적으로 변환한다는 것을 배웠다. 한 자료형의 값을 더 큰 자료형으로 승격하려면 암시적 형 변환 시스템을 사용해도 좋다.
 
@@ -1123,4 +1360,231 @@ i = static_cast<int>(i / 2.5);
 #### 정리 (Summary)
 
 형 변환을 할 때마다 문제가 발생할 가능성이 있으므로 가능하면 형 변환을 피해야 한다. 그러나 피할 수 없는 경우, C-style cast 대신 C++의 `static_cast`를 사용해야 한다.
+
+
+
+# 23
+
+### switch
+
+많은 `if-else` 문을 연결할 수 있지만, 이것은 가독성이 떨어져 읽기 어렵다. 아래 프로그램을 보자.
+
+```
+#include <iostream>
+
+enum Colors
+{
+    COLOR_BLACK,
+    COLOR_WHITE,
+    COLOR_RED,
+    COLOR_GREEN,
+    COLOR_BLUE
+};
+
+void printColor(Colors color)
+{
+    if (color == COLOR_BLACK)
+        std::cout << "Black";
+    else if (color == COLOR_WHITE)
+        std::cout << "White";
+    else if (color == COLOR_RED)
+        std::cout << "Red";
+    else if (color == COLOR_GREEN)
+        std::cout << "Green";
+    else if (color == COLOR_BLUE)
+        std::cout << "Blue";
+    else
+        std::cout << "Unknown";
+}
+
+int main()
+{
+    printColor(COLOR_GREEN);
+
+    return 0;
+}
+```
+
+같음을 테스트하는 단일 변수에서 `if-else` 체인을 수행하는 것이 일반적이므로 C++은 `switch`라는 조건부 분기 문을 제공한다. 위와 같은 프로그램의 `switch` 문 형태를 소개한다.
+
+```
+void printColor(Colors color)
+{
+    switch (color)
+    {
+        case COLOR_BLACK:
+            std::cout << "Black";
+            break;
+        case COLOR_WHITE:
+            std::cout << "White";
+            break;
+        case COLOR_RED:
+            std::cout << "Red";
+            break;
+        case COLOR_GREEN:
+            std::cout << "Green";
+            break;
+        case COLOR_BLUE:
+            std::cout << "Blue";
+            break;
+        default:
+            std::cout << "Unknown";
+            break;
+    }
+}
+```
+
+`switch` 문에 대한 개념은 간단하다. `switch` 표현식이 값을 평가하고, 각 `case` 레이블의 값과 '같은' 지 테스트한다. 레이블의 값과 같으면 레이블 뒤의 명령문을 실행한다. 일치하는 레이블이 없으면 `default` 뒤의 명령문을 실행한다. (존재하는 경우)
+
+이러한 방식으로 구현되기 때문에 `switch` 문이 `if-else` 체인보다 일반적으로 더 효율적이다.
+
+------
+
+#### Starting a switch
+
+`switch` 키워드를 사용하여 `switch` 문을 시작한 다음 평가한 표현식을 사용한다. 일반적으로 이 표현식은 단 하나의 변수이지만 nx + 2 또는 nx - ny와 같이 좀 더 복잡할 수 있다. 이 표현식에 대한 한 가지 제한 사항은 정수 유형(char, short, int, long, long long, enum)으로 평가되어야 한다는 것이다. 부동 소수점 변수 및 기타 비 정수 유형은 표현식으로 사용할 수 없다.
+
+`switch` 식 뒤에 블록을 선언한다. 블록 안에는 **레이블(label)**을 사용하여 '같음'을 테스트하려는 모든 값을 정의한다. 레이블에는 두 가지 종류가 있다.
+
+```
+switch (expression)
+{
+    // '같음'을 테스트하는 레이블이 들어간다.
+}
+```
+
+------
+
+#### Case labels
+
+첫 번째 종류의 레이블은 `case` 레이블이다. `case` 키워드를 사용하여 선언된 다음 상수 표현식이 온다. 상수 표현식은 상수값을 평가하는 표현식이다. 즉, 리터럴(Ex. 5), 열거형(Ex. COLOR_REN) 또는 상수 변수(Ex. const int 자료형인 변수 x) 등이다.
+
+`case` 레이블 다음의 상수 표현식은 `switch` 키워드 다음의 표현식과 평가된 값이 '같은'지 테스트 된다. 같을 경우, `case` 레이블 아래의 코드가 실행된다.
+
+주의: 모든 `case` 레이블 표현식은 고유한 값으로 평가되어야 한다.
+
+```
+switch (x)
+{
+    // 주의: 모든 case 레이블 표현식은 고유한 값으로 평가되어야 한다.
+    case 4:
+    case 4:          // illegal -- already used value 4!
+    case COLOR_BLUE: // illegal, COLOR_BLUE evaluates to 4!
+};
+```
+
+여러 `case` 레이블이 같은 명령문을 참조하도록 할 수 있다. 다음 함수는 여러 `case`를 사용하여 `c` 매개 변수가 ASCII 숫자인지 테스트하는 기능을 가진다.
+
+```
+bool isDigit(char c)
+{
+    switch (c)
+    {
+        case '0': // if c is 0
+        case '1': // or if c is 1
+        case '2': // or if c is 2
+        case '3': // or if c is 3
+        case '4': // or if c is 4
+        case '5': // or if c is 5
+        case '6': // or if c is 6
+        case '7': // or if c is 7
+        case '8': // or if c is 8
+        case '9': // or if c is 9
+            // 같은 명령문을 참조한다.
+            return true; // then return true
+        default:
+            return false;
+    }
+}
+```
+
+위 함수는 `c`가 ASCII 숫자인 경우, 일치하는 `case` 문 다음 첫 번째 명령문이 실행된다. (즉, `return true;`)
+
+------
+
+#### The default label
+
+두 번째 종류의 레이블은 `default` 레이블이다. (defualt case라고도 불린다.) `default` 키워드를 사용하여 선언된다. 이 레이블 아래의 코드는 `switch` 표현식과 일치하는 case가 하나도 없으면 실행된다. `default` 레이블은 선택사항이며 `switch` 문당 하나만 있을 수 있다. 일반적으로 `switch` 문 블록의 마지막 레이블로 선언되지만, 반드시 필요한 것은 아니다.
+
+위 `isDisit()` 함수 예제에서 c가 ASCII 숫자가 아닌 경우 default case가 실행되고 false를 반환한다.
+
+------
+
+#### Switch execution and fall-through
+
+`switch` 문의 주의점 중 하나는 `switch` 표현식의 값과 일치 할 때 실행이 진행되는 방식이다. 값이 일치하는 `case` 레이블을 만나거나 default case 문이 실행되면 해당 레이블 다음의 첫 번째 명령문에서 실행이 시작되고, **다음과 같은 종료 조건 중 하나가 충족 될 때까지 실행이 계속된다.**
+
+- `switch` 블록의 끝에 도달할 경우
+- `return` 문이 발생할 경우
+- `goto` 문이 발생할 겨우
+- `break` 문이 발생할 경우
+- 뭔가 다른 것이 프로그램의 정상적인 흐름을 방해할 경우 (Ex. exit() 호출, 예외 발생 등)
+
+이러한 종료 조건 중 하나가 충족되지 않으면 case 문은 계속해서 후속 case 문으로 넘어간다.
+
+```
+switch (2)
+{
+   case 1: // Does not match
+       std::cout << 1 << '\n'; // skipped
+   case 2: // Match!
+       std::cout << 2 << '\n'; // Execution begins here
+   case 3:
+       std::cout << 3 << '\n'; // This is also executed
+   case 4:
+       std::cout << 4 << '\n'; // This is also executed
+   default:
+       std::cout << 5 << '\n'; // This is also executed
+}
+```
+
+```
+result:
+2
+3
+4
+5
+```
+
+실행 흐름이 한 case에서 다른 case로 넘어가는 경우를 **fall-through**라고 한다. fall-through는 의도적인 경우가 거의 없으므로 주의해야 한다.
+
+> fall-through는 '구멍 사이로 떨어지다'에서 유래한 말이다.
+
+------
+
+#### Break statements
+
+`break` 명령문(`break` 키워드를 사용하여 선언)은 컴파일러에 이 **switch 문 사용이 완료되었음을 알려준다.**( 또는 while, do while, for 루프) `break` 문이 발생하면 `switch` 블록이 끝난다.
+
+`break` 문이 제대로 삽입된 예제를 보자.
+
+```
+switch (2)
+{
+   case 1: // Does not match -- skipped
+       std::cout << 1 << '\n';
+       break;
+   case 2: // Match!  Execution begins at the next statement
+       std::cout << 2 << '\n'; // Execution begins here
+       break; // Break terminates the switch statement
+   case 3:
+       std::cout << 3 << '\n';
+       break;
+   case 4:
+       std::cout << 4 << '\n';
+       break;
+   default:
+       std::cout << 5 << '\n';
+       break;
+}
+// Execution resumes here
+
+2
+```
+
+이제 `case 2:`가 일치하면 정수 2가 출력되고, `break` 명령문으로 인해 `switch` 문이 종료된다.
+
+*경고: C++에서 case 문 끝에 break를 잊어 버리는 경우는 가장 흔한 오류중 하나다!*
+
+[출처](https://boycoding.tistory.com/186?category=1009239)
 
