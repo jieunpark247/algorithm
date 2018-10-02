@@ -1,3 +1,3 @@
-## beakjoon & sw expert academy
+## Algorithm Study
 
 **Algorithm (using C++)**
