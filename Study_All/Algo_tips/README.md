@@ -8,7 +8,7 @@
 
 [5. max,min(define) 선언](#5)
 
-[6. vector 여러가지 선언 방법 (2,3차원 등)](#6)
+[6. vector](#6)
 
 [7. enum](#7)
 
@@ -192,17 +192,98 @@ scanf_s("%1d",&map[i][j])
 
 # 6
 
-###  vector 여러가지 선언 방법 (2,3차원 등)
+### Vector
+
+
+
+####  vector 여러가지 선언 방법 (2,3차원 등)
 
 ```
-vector <  int  > v;
+vector <  int  > v; //1차원
 
-vector < pair < int, int > > v;
+vector < pair < int, int > > v; //pair (make_pair)
 
-vector < pair < int, int > > vv[MAX];
+vector <  int  > v[10]; //2차원
+vector < vector <int> > v;
 
+vector < pair < int, int > > vv[MAX]; //3차원
 vector < pair < pair < int, int >, int > > v;
 ```
+
+#### vector erase
+
+```
+int i // i번째 것을 지우고 싶을때 
+
+vector <int> v;
+
+v.erase(v.begin()+i);
+
+# 
+```
+
+
+
+- **v.assign(5, 2);**- 2의 값으로 5개의 원소 할당.
+- **v.at(idx);**- idx번째 원소를 참조
+  \- v[idx] 보다 속도는 느리지만, 범위를 점검하므로 안전함
+- **v[idx];**- idx 번째 원소를 참조
+  \- 범위를 점검하지 않으므로 속도가 v.at(idx)보다 빠름
+- **v.front();**- 첫번째 원소를 참조
+- **v.back();**- 마지막 원소를 참조
+- **v.clear();**- 모든 원소를 제거
+  **- 원소만 제거하고 메모리는 남아있음**
+  \- size만 줄어들고 capacity는 그대로 남아있음
+- **v.push_back(7);**- 마지막 원소 뒤에 원소 7을 삽입
+- **v.pop_back();**- 마지막 원소를 제거
+- **v.begin();**- 첫번째 원소를 가리킴. (iterator와 사용)
+- **v.end();**- 마지막의 "다음"을 가리킴(iterator와 사용)
+- **v.rbegin();**- reverse begin을 가리킴(거꾸로 해서 첫번째 원소를 가리킴)
+  \- iterator와 사용.
+- **v.rend();**- reverse end 을 가리킴 (거꾸로 해서 마지막의 다음을 가리킴)
+  \- iterator와 사용.
+- **v.reserve(n);**- n개의 원소를 저장할 위치를 예약(미리 동적할당 해놓음)
+- **v.resize(n);**- 크기를 n으로 변경
+  \- 더 커졌을 경우 default값인 0으로 초기화 
+
+- **v.resize(n,3);**- 크기를 n으로 변경
+  \- 더 커졌을 경우 인자의 값을 3으로 초기화
+
+- **v.size();**- 원소의 갯수를 리턴한다.
+
+- **v.capacity();**- 할당된 공강의 크기를 리턴한다
+  \- 공간 할당의 기준은 점점 커지면서로 capacity를 할당
+  \- dev c++ 기준으로 string 클래스로 vector 를 만들었을때.
+  원소 갯수 1 => capacity 1   원소 갯수 2 => capacity 2
+  원소 갯수 3 => capacity 4   원소 갯수 4 => capacity 4
+  원소 갯수 5 => capacity 8   원소 갯수 6 => capacity 8
+  원소 갯수 7 => capacity 8   원소 갯수 8 => capacity 8
+  원소 갯수 9 => capacity 16
+  이런식으로 메모리 할당을 하는 이유는 push_back이 일어날때 마다 동적할당을 하면,
+  비효율적이므로 미리 정해둔 만큼 동적할당을 한번에 한다.   
+
+  **capacity와 size는 다름**
+
+  ##### size()는 메모리에 들어있는 값들의 갯수  vs capacity 는 전체 할당된 배열 크기 
+
+  
+
+- **v2.swap(v1);**- v1과 v2의 원소와 capacity 바꿔줌. (모든걸 스왑해줌)
+  - v1의 capacity를 없앨때 (할당한 메모리를 프로그램이 끝나기 전에 없애고 싶을때) 사용하기도 함
+  - v2를 capacity가 0인 임시 객체로 만들어서 스왑을 해줌.
+  - `vector<int>().swap(v1);`
+- **v.insert(2, 3, 4);**- 2번째 위치에 3개의 4값을 삽입 (뒤엣놈들은 뒤로 밀림)
+- **v.insert(2, 3);**- 2번째 위치에 3의 값을 삽입
+  \- 삽입한 곳의 iterator를 반환
+- **v.erase(iter);**- iter 가 가리키는 원소를 제거
+  \- size만 줄어들고 capacity(할당된 메모리)는 그대로 남는다
+  \- erase는 파라미터 하나를 받을때와 두개를 받을 때 다름
+
+- **v.empty()**
+  \- vector가 비었으면 리턴 true
+  \- 비어있다의 기준은 size가 0이라는 것이지, capacity와는 상관이없음
+
+ 
 
 
 
