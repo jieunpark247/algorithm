@@ -102,7 +102,11 @@ TCP는 바이트 단위로 번호를 매김 -> 바이트 번호가 매겨지면 
 
    ![스크린샷 2018-10-07 오후 2.45.36](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 2.45.36.png)
 
+   
+
    ![스크린샷 2018-10-07 오후 2.49.00](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 2.49.00.png)
+
+   
 
 ​	
 
@@ -134,11 +138,19 @@ TCP는 바이트 단위로 번호를 매김 -> 바이트 번호가 매겨지면 
 
 **3 Way (Three Way) Handshake**
 
+
+
 ![스크린샷 2018-10-07 오후 3.11.04](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 3.11.04.png)
+
+
 
 
 
 **4 Way (Four Way) Handshake**
 
+
+
 ![스크린샷 2018-10-07 오후 3.11.25](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 3.11.25.png)
+
+
 
