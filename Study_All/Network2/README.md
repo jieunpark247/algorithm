@@ -100,11 +100,13 @@ TCP는 바이트 단위로 번호를 매김 -> 바이트 번호가 매겨지면 
 
    
 
-![스크린샷 2018-10-07 오후 2.45.36](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 2.45.36.png)
+   ![1](/Users/PARKHASIK/Desktop/screen shot/1.png)
+
+   
+
+   ![2](/Users/PARKHASIK/Desktop/screen shot/2.png)
 
 
-
-![스크린샷 2018-10-07 오후 2.49.00](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 2.49.00.png)
 
 
 ​	
@@ -115,8 +117,8 @@ TCP는 바이트 단위로 번호를 매김 -> 바이트 번호가 매겨지면 
 
    SYN세그먼트를 수신한 TCP B는 이에 대한 응답으로 확인 응답번호 101과함께 TCP B에서도 TCP A로 연결 설정을 요청하는 SYN제어 플래그(SEQ=300)을 설정하여 SYN, ACK 세그먼트를 그림3의 3번과 같이 보낸다. 이를 수신한 TCP A 는 ACK제어 플래그와 ACK=101을 확인하여 연결 요청이 제대로 전달된 것을 알 수 있다. 또한 SYN제어 플래그가 같이 설정되어 있어 TCP B에서 연결 요청이 왔음을 알 수 있어 이에대한 ACK세그먼트를 TCP B에 보냄으로써 세 방향 핸드쉐이크가 완성되어 TCP A TCP B간에 양 방향 연결이 설정되었음을 알 수 있다. 
 
-   
-![스크린샷 2018-10-07 오후 2.56.25](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 2.56.25.png)
+   ![3](/Users/PARKHASIK/Desktop/screen shot/3.png)
+
 
 2. TCP연결 종료(연결을 종료할 때는 4 way handshake 수행)
 
@@ -124,7 +126,7 @@ TCP는 바이트 단위로 번호를 매김 -> 바이트 번호가 매겨지면 
 
    이제 TCP B는 단계 4에서처럼 연결종료를 위하여 FIN세그먼트를 TCP A로 보낸다. 단계2에서와 마찬가지로 이전 데이터 전송에 대한 확인 응답을 위하여 ACK를 같이 보내고 있다. 그러면 TCP A는 단계 5와 같이 이에대한 ACK세그먼트를 보내어 TCP연결을 완전히 종료하게 된다. 
 
-![스크린샷 2018-10-07 오후 3.03.41](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 3.03.41.png)
+![4](/Users/PARKHASIK/Desktop/screen shot/4.png)
 
 **흐름제어** -> 슬라이딩 윈도우 프로토콜을 사용한다.
 
@@ -138,17 +140,15 @@ TCP는 바이트 단위로 번호를 매김 -> 바이트 번호가 매겨지면 
 
 
 
-![스크린샷 2018-10-07 오후 3.11.04](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 3.11.04.png)
-
-
+![5](/Users/PARKHASIK/Desktop/screen shot/5.png)
 
 
 
 **4 Way (Four Way) Handshake**
 
+![6](/Users/PARKHASIK/Desktop/screen shot/6.png)
 
 
-![스크린샷 2018-10-07 오후 3.11.25](/Users/PARKHASIK/Desktop/screen shot/스크린샷 2018-10-07 오후 3.11.25.png)
 
 
 
