@@ -1851,6 +1851,7 @@ x = x << 1; // x will be 8
 
 ```
 priority_queue <pair < long , pair < pair <long ,long>, pair < long, long > > > >  q; 
+int n = q.top().second.second.second; 
 ```
 
 -> 여러개 pair 써본것 
