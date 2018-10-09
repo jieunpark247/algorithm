@@ -1919,8 +1919,8 @@ if(map[i][j].cnt>0){
 ```
 const int maxu =2 ;
 
-stuct{
-    int x,y
+struct{
+    int x,y;
 }user[maxu];
 
 user[0].x = 1;
