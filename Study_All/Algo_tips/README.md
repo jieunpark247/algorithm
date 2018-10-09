@@ -44,6 +44,14 @@
 
 [24.비트 단위 연산자](#24)
 
+[25. priority queue](#25)
+
+[26. queue 초기화 시키기](#26)
+
+[27. ](#27)
+
+[28. ](#28)
+
 
 
 # 1
@@ -1832,4 +1840,35 @@ x = x << 1; // x will be 8
 - 비트 XOR 연산자(`^`): 열에서 한 개 비트만 1이면 해당 열에 대한 결과는 1이다.
 
 [출처](https://boycoding.tistory.com/163?category=1007523)
+
+
+
+#  25
+
+### priority queue
+
+우선순위큐 -> 내림차순이 기본이다. (오름차순으로 하려면 - 표시 붙이기)
+
+```
+priority_queue <pair < long , pair < pair <long ,long>, pair < long, long > > > >  q; 
+```
+
+-> 여러개 pair 써본것 
+
+
+
+# 26
+
+### queue 초기화 시키기
+
+```
+void ClearQueue(priority_queue <int> &someQueue)
+
+{
+    priority_queue <int> empty;
+
+    swap(someQueue,empty); //새로운 큐와 원래 있던 큐를 바꾸기
+
+}
+```
 
