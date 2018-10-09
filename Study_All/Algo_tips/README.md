@@ -48,7 +48,7 @@
 
 [26. queue 초기화 시키기](#26)
 
-[27. ](#27)
+[27. 여러가지 방법](#27)
 
 [28. ](#28)
 
@@ -1871,5 +1871,63 @@ void ClearQueue(priority_queue <int> &someQueue)
     swap(someQueue,empty); //새로운 큐와 원래 있던 큐를 바꾸기
 
 }
+```
+
+
+
+# 27
+
+### 여러가지 방법
+
+
+
+```
+#define UP 1
+#defint DOWN 2
+...
+
+typedef struct{
+
+	int int;
+	int dir
+	int maxcnt;
+
+}node;
+
+node map[n+1][n+1];
+node next_map[n+1][n+1];
+int xy[5][2] = {{0,0}, {-1,0},{1,0},{0,-1},{0,1}};
+
+..
+if(map[i][j].cnt>0){
+    int dir = map[i][j].dir;
+    int nextx = i + xy[dir][0];
+    int nexty = j + xy[dir][1];
+    
+    if(nextx==0 ..){
+        next_map[nextx][nexty].cnt = map[i][j].cnt/2;
+        
+        if(dir == UP)
+        	next_map[nextx][nexty].dir = DOWN;
+        	...
+    }
+}
+```
+
+
+
+```
+const int maxu =2 ;
+
+stuct{
+    int x,y
+}user[maxu];
+
+user[0].x = 1;
+user[0].y = 1;
+```
+
+```
+int turningMagnets[5] = {0,};
 ```
 
