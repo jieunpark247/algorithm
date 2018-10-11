@@ -1994,3 +1994,32 @@ int turningMagnets[5] = {0,};
     }
 ```
 
+```
+    // struct people { ... } 구조체를 PEOPLE 이라는 데이터형으로 정의한다.
+    typedef struct People{
+        char name[20];
+        int age;
+        double height;
+        double weight;
+    } PEOPLE;
+  
+    // data 라는 변수명으로 people 구조체를 선언한다.
+ 
+    PEOPLE data;      // 일반 변수
+    PEOPLE list[20];  // 배열
+    PEOPLE *p;         // 포인터
+```
+
+```
+struct Rectangle { 
+	double length = 1.0; 
+	double width = 1.0; 
+}; 
+
+int main() { 
+	Rectangle x; // length = 1.0, width = 1.0 
+	x.length = 2.0; // you can assign other values like normal return 0; 
+}
+
+```
+
