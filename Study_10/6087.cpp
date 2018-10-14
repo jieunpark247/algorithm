@@ -35,8 +35,16 @@ void solve() {
 
 			if (nx >= 0 && ny >= 0 && nx < w && ny < h) {
 				if (map[nx][ny] != 1) {
-					int& t1 = visited[i][nx][ny], t2 = visited[dir][cx][cy];
-					if (t1 && t1 <= t2) continue;
+					int &t1 = visited[i][nx][ny], t2 = visited[dir][cx][cy];
+
+					if (t1 && t1 <= t2) 
+						continue;
+					
+				/*	if (visited[i][nx][ny] != 0 && visited[i][nx][ny] <= visited[dir][cx][cy]) continue;
+					visited[i][nx][ny] = visited[dir][cx][cy] + 1;
+					if (dir == i) visited[i][nx][ny]--;*/
+					//이것도 가능 
+
 					t1 = t2 + 1;
 					if (dir == i) t1--;
 					q.push(make_pair(i, make_pair(nx, ny)));
