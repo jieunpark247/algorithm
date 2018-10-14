@@ -50,7 +50,7 @@
 
 [27. 여러가지 방법](#27)
 
-[28. ](#28)
+[28. 레퍼런스&](#28)
 
 
 
@@ -1882,6 +1882,7 @@ void ClearQueue(priority_queue <int> &someQueue)
 
 
 ```
+//#define 사용 & 구조체 & 맵 
 #define UP 1
 #defint DOWN 2
 ...
@@ -1914,9 +1915,45 @@ if(map[i][j].cnt>0){
 }
 ```
 
+```
+//구조체 큐
+struct node {
+	int x, y, d;
+};
+int visit[4][101][101], sx, sy, ex, ey, W, H, dx[4] = { 1, 0, -1, 0 }, dy[4] = { 0,1,0,-1 };
+char map[101][101];
+queue <node> q;
+
+void bfs() {
+	while (!q.empty()) {
+		node value = q.front();
+		q.pop();
+
+		for (int i = 0,nx,ny; i < 4; i++) {
+			nx = value.x + dx[i];
+			ny = value.y + dy[i];
+			if (nx >= 0 && ny >= 0 && nx < W && ny < H && map[nx][ny] !='*') {
+				int &n1 = visit[i][nx][ny];
+				int &n2 = visit[value.d][value.x][value.y];
+				if (n1 && n1 <= n2) continue;
+					n1 = n2 + 1;
+				if(value.d == i){
+					n1--;
+				}
+			//	else {
+				//}
+				q.push({ nx,ny,i });
+			}
+		}
+	}
+
+}
+```
+
 
 
 ```
+//구조체 배열
 const int maxu =2 ;
 
 struct{
@@ -2023,3 +2060,131 @@ int main() {
 
 ```
 
+
+
+# 28
+
+### 레퍼런스 &
+
+```
+using namespace std;
+
+void swap(int& fnum1, int& fnum2) {
+
+	int temp;
+	temp = fnum1;
+	fnum1 = fnum2;
+	fnum2 = temp;
+}
+int main() {
+	int n1 = 20; int n2 = 30;
+	cout << n1 << n2;
+	swap(n1, n2);
+	cout << n1 << n2;
+
+}
+```
+
+```
+#include<iostream>
+#include<queue>
+#include<vector>
+#include<queue>
+
+using namespace std;
+
+
+int main() {
+
+	int v = 10;
+	int& r = v;
+
+	v++;
+	cout << v << r;
+	r++;
+	cout << v << r;
+
+}
+```
+
+> 참조하는 변수의 이름을 가지고 하는 연산과 같은 효과를 지닌다.
+
+
+
+```
+int main() {
+	
+	int &ref1; //초기화 되지 않았으므로 error
+	int &ref2 = 10; //상수가 올 수 없으므로 error
+
+
+}
+```
+
+> 레퍼런스는 선언과 동시에 초기화가 되어야한다
+
+
+
+```
+#include<iostream>
+#include<queue>
+#include<vector>
+#include<queue>
+
+using namespace std;
+
+int& increment(int& v) {
+	v++;
+	return v;
+}
+int main() {
+	
+	int n = 100;
+	int& ref = increment(n);
+
+	cout << n <<" "<< ref;
+	return 0;
+}
+```
+
+> 레퍼런스를 리턴하는 함수 정의
+
+**지역변수를 레퍼런스로 리턴할 수 없다**
+
+
+
+```
+#include<iostream>
+#include<queue>
+#include<vector>
+#include<queue>
+
+using namespace std;
+
+void swap(int *fnum1, int *fnum2) {
+
+	int temp;
+	temp = *fnum1;
+	*fnum1 = *fnum2;
+	*fnum2 = temp;
+} //포인터를 이용해서 메모리공간에 직접 접근 가능
+int main() {
+	
+
+	int n1 = 20; int n2 = 30;
+	cout << n1 << n2;
+	swap(n1, n2);
+	cout << n1 << n2;
+
+}
+```
+
+> 포인터를 이용한 swap함수
+
+```
+int &t1 = visited[i][nx][ny], t2 = visited[dir][cx][cy];
+
+if (t1 && t1 <= t2) continue;
+```
+
+이런식으로 t1의 값이 0일 때는 if(t1&&..) 식에 부합하지 않는다 1이상일때 값만 continu할 수 있다
