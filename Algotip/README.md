@@ -52,6 +52,8 @@
 
 [28. 레퍼런스&](#28)
 
+[29. 마름모 영역 구하기](#29)
+
 
 
 # 1
@@ -2188,3 +2190,39 @@ if (t1 && t1 <= t2) continue;
 ```
 
 이런식으로 t1의 값이 0일 때는 if(t1&&..) 식에 부합하지 않는다 1이상일때 값만 continu할 수 있다
+
+
+
+# 29
+
+
+
+### 마름모 영역 구하기 
+
+```
+
+	int nexty;
+	int endp;
+
+	for (int i = 0; i <= k - 1; i++) { // 제일 중간 값빼고 처리하기
+		int upNextx = x - k + i;// k만큼 빼주고 (맨위로 올라간 다음에 i칸만큼 내려간 위치) 
+		int downNextx = x + k - i;
+
+		endp = i * 2 - 1; // 돌아갈 칸 갯수 (i가 2번째이면 3개의 칸이선택됨 i=1(1) i=2(3) i=3(5).. )
+		nexty = y - endp / 2; // y는 중간에 있으니 y를 맨 왼쪽으로 보냄  endp만큼 오른쪽으로 가면서 (i=2(3개)) 확인
+		for (int j = 0; j<endp; j++) { // 올라가면서(오른쪽으로 가면서 ) 범위안이고 맵이 1인지 확인
+			if (isRange(upNextx, nexty + j) /*&& map[upNextx][nexty + j] == 1*/) 
+			//map 조건은 내가 걸기
+				//cnt++; -> 내가 집어넣기
+			if (isRange(downNextx, nexty + j) /*&& map[downNextx][nexty + j] == 1*/)
+				//cnt++;
+
+		}
+	}
+	endp = k * 2 - 1; //중간값 처리 중간은 i=3이면 (5)전체다 체크해줌 
+	nexty = y - endp / 2;
+	for (int i = 0; i<endp; i++)
+		if (isRange(x, nexty + i) /*&& map[x][nexty + i] == 1*/)
+			//cnt++;
+```
+
