@@ -2486,6 +2486,53 @@ strcmp(str1, str2)
 
   sort(answer.begin(),answer.end(),greater<char>());
 
+
+
+#### strtok
+
+문자열 자르기
+
+		char* str0 = strtok(str1, " ");
+	
+		while (str0 != NULL) {
+			cout << str0 << endl;
+			str0 = strtok(NULL, " ");
+		}
+
+**string 배열에 집어넣기** 
+
+```
+	char* str0 = strtok(str1, " ");
+		int cnt = 0;
+		while (str0 != NULL) {
+			cout << str0 << endl;
+			strr[cnt++] = string(str0);
+			str0 = strtok(NULL, " ");
+		}
+		
+```
+
+--------------
+
+### string 
+
+```c++
+string a = "hello jieun";
+a.find("ji") //6
+```
+
+#### atoi
+
+문자열이 숫자면 숫자를 반환 , 숫자가 숫자가 아니면 0을 반환 
+
+#### substr
+
+```c++
+	string a = "hello jieun";
+	string b = a.substr(2);//llo jieun
+```
+
+
 # 34 
 
 소문자> 대문자 바꾸기 
