@@ -54,9 +54,21 @@
 
 [29. 마름모 영역 구하기](#29)
 
-[30. ](#30)
+[30. pair사용할때 정렬기준 정하기](#30)
+
+[31. vector 사용시 중복제거](#31)
+
+[32.구조체 이해](#32)
+
+[33.문자열 다루기](#33)
+
+[34.소문자 대문자 바꾸기(아스키코드)](#34)
+
+[35. char< > string 변환](#35)
 
 
+
+# 
 
 # 1
 
@@ -101,10 +113,11 @@ continue;
 
 # 3 
 
-###  순열과 조합 
+### 순열과 조합 
+
+C++ stl 사용해서 간단하기 만들어보기 
 
 ```
-
 	vector<int> ind;
 
 	int k = ....;
@@ -132,11 +145,12 @@ continue;
 
 
 ```
+
 : 조합 만들기 
 
 
 
-```  
+```
 		
 	   vector<int> ind;
         
@@ -166,6 +180,7 @@ continue;
 
 
 ```
+
 :  순열 만들기
 
 
@@ -174,7 +189,43 @@ continue;
 sort(v.begin(), v.end());  
 sort(ind.begin(), ind.end(),greater<int>());
 ```
+
 :  오름차순 정렬 , 내림차순
+
+
+
+
+
+### 재귀로 만들어보기 
+
+### 1
+
+```c++
+ar[..] = {0,}
+void rec(int depth , int next){	
+    if(depth == ..){
+        return
+    }
+    for(int i=next;i<N;i++){
+        ar[depth] = i;
+        rec(depth+1,i+1);
+    }
+}
+```
+
+### 2
+
+```
+void rec(int curr,int depth){
+	ar[depth] = curr;
+	if(depth == ..) return;
+	
+	for(int i=curr+1;i<N;i++){
+		rec(i,depth+1);
+	}
+	return;
+}
+```
 
 
 
@@ -182,7 +233,7 @@ sort(ind.begin(), ind.end(),greater<int>());
 
 ## 공백없는 입력
 
-```    
+```
 scanf_s("%1d",&map[i][j])
 ```
 
@@ -208,7 +259,7 @@ scanf_s("%1d",&map[i][j])
 
 
 
-####  vector 여러가지 선언 방법 (2,3차원 등)
+#### vector 여러가지 선언 방법 (2,3차원 등)
 
 ```
 vector <  int  > v; //1차원
@@ -237,24 +288,37 @@ v.erase(v.begin()+i);
 
 
 - **v.assign(5, 2);**- 2의 값으로 5개의 원소 할당.
+
 - **v.at(idx);**- idx번째 원소를 참조
   \- v[idx] 보다 속도는 느리지만, 범위를 점검하므로 안전함
+
 - **v[idx];**- idx 번째 원소를 참조
   \- 범위를 점검하지 않으므로 속도가 v.at(idx)보다 빠름
+
 - **v.front();**- 첫번째 원소를 참조
+
 - **v.back();**- 마지막 원소를 참조
+
 - **v.clear();**- 모든 원소를 제거
   **- 원소만 제거하고 메모리는 남아있음**
   \- size만 줄어들고 capacity는 그대로 남아있음
+
 - **v.push_back(7);**- 마지막 원소 뒤에 원소 7을 삽입
+
 - **v.pop_back();**- 마지막 원소를 제거
+
 - **v.begin();**- 첫번째 원소를 가리킴. (iterator와 사용)
+
 - **v.end();**- 마지막의 "다음"을 가리킴(iterator와 사용)
+
 - **v.rbegin();**- reverse begin을 가리킴(거꾸로 해서 첫번째 원소를 가리킴)
   \- iterator와 사용.
+
 - **v.rend();**- reverse end 을 가리킴 (거꾸로 해서 마지막의 다음을 가리킴)
   \- iterator와 사용.
+
 - **v.reserve(n);**- n개의 원소를 저장할 위치를 예약(미리 동적할당 해놓음)
+
 - **v.resize(n);**- 크기를 n으로 변경
   \- 더 커졌을 경우 default값인 0으로 초기화 
 
@@ -281,12 +345,16 @@ v.erase(v.begin()+i);
   
 
 - **v2.swap(v1);**- v1과 v2의 원소와 capacity 바꿔줌. (모든걸 스왑해줌)
+
   - v1의 capacity를 없앨때 (할당한 메모리를 프로그램이 끝나기 전에 없애고 싶을때) 사용하기도 함
   - v2를 capacity가 0인 임시 객체로 만들어서 스왑을 해줌.
   - `vector<int>().swap(v1);`
+
 - **v.insert(2, 3, 4);**- 2번째 위치에 3개의 4값을 삽입 (뒤엣놈들은 뒤로 밀림)
+
 - **v.insert(2, 3);**- 2번째 위치에 3의 값을 삽입
   \- 삽입한 곳의 iterator를 반환
+
 - **v.erase(iter);**- iter 가 가리키는 원소를 제거
   \- size만 줄어들고 capacity(할당된 메모리)는 그대로 남는다
   \- erase는 파라미터 하나를 받을때와 두개를 받을 때 다름
@@ -301,7 +369,7 @@ v.erase(v.begin()+i);
 
 # 7
 
-###  enum
+### enum
 
 ```
 enum { PATH = 1 ,...}; 
@@ -568,7 +636,7 @@ int main()
 
 # 8 
 
-###  이동 좌표 
+### 이동 좌표 
 
 int dx[4] = { -1,0,1,0 }; //이동할 때 쓰는 x 좌표  int dy[4] = { 0,-1,0,1 }; //이동할 때 쓰는 y 좌표
 
@@ -586,7 +654,7 @@ int dx[4] = { -1,0,1,0 }; //이동할 때 쓰는 x 좌표  int dy[4] = { 0,-1,0,
 
 # 9
 
-###  memset , memcpy
+### memset , memcpy
 
 1. 
 
@@ -606,7 +674,7 @@ int test1[5] ;
 memset( test1, 0, 5, * sizeof(int) ) ;
 ```
 
->   int 형의 크기가 5인 배열에 값을 0으로 초기화 하는것
+>  int 형의 크기가 5인 배열에 값을 0으로 초기화 하는것
 
 
 
@@ -614,7 +682,7 @@ memset( test1, 0, 5, * sizeof(int) ) ;
 memset(visited, 0, sizeof(visited)); 
 ```
 
->  visited 배열을 visited 크기만큼 0으로 초기화 시킴 
+> visited 배열을 visited 크기만큼 0으로 초기화 시킴 
 
 
 
@@ -677,10 +745,9 @@ int main()
 } 
 ```
 
-
 # 10
 
-###  알파벳 -> 숫자
+### 알파벳 -> 숫자
 
 ```
 s[0] - 'A' 
@@ -690,7 +757,7 @@ s[0] - 'A'
 
 # 11
 
-###  #include <string>
+### #include <string>
 
 ```
 string s  
@@ -943,7 +1010,7 @@ length() 함수는 지금까지 사용한 것처럼 일반적인 함수가 아�
 
 # 12
 
-###  char  string 변환
+### char  string 변환
 
 ```
 string oneN; 
@@ -964,7 +1031,7 @@ for(int jj=0;jj<number_pwd.size();jj++){
 
 # 13
 
-###  16진수 10진수 변환
+### 16진수 10진수 변환
 
 ```
    char *s = (char*) oneN.c_str();
@@ -978,7 +1045,7 @@ for(int jj=0;jj<number_pwd.size();jj++){
 
 # 14
 
-###  is_Range()
+### is_Range()
 
 ```
 bool is_range(int x, int y){
@@ -992,7 +1059,7 @@ bool is_range(int x, int y){
 
 # 15
 
-###  엔터입력시 종료
+### 엔터입력시 종료
 
 ```
   do {
@@ -1008,7 +1075,7 @@ bool is_range(int x, int y){
 
 # 16
 
-###  goto문
+### goto문
 
 ```
 #include <stdio.h>  
@@ -1040,7 +1107,7 @@ int main()
 
 # 17
 
-###  for문
+### for문
 
 ```
 nt array[5] = { 9, 7, 5, 3, 1 }; 
@@ -1054,7 +1121,7 @@ std::cout << element << ' ';
 
 # 18 
 
-###  string-> int 변환 
+### string-> int 변환 
 
 **1) 함수 설명**
 
@@ -1159,7 +1226,7 @@ std::cout << element << ' ';
 
   # 19
 
-  ###  아스키코드 A -> 0 변환
+  ### 아스키코드 A -> 0 변환
 
   ```
    cin >> A;
@@ -1171,7 +1238,7 @@ std::cout << element << ' ';
 
 # 20
 
-###  for 문
+### for 문
 
 ```
 #include <iostream>
@@ -1279,7 +1346,7 @@ int main()
 
 # 21
 
-###  auto
+### auto
 
 #### C++ 11에서 타입 추론 (Type inference in C++ 11)
 
@@ -1359,7 +1426,7 @@ auto add(int x, int y)
 
 # 22
 
-###  명시적 형 변환 (Explict type conversion)
+### 명시적 형 변환 (Explict type conversion)
 
 이전 포스트 '[05.01 - 암시적 형 변환 (Implict type conversion)](http://boycoding.tistory.com/176?category=1008283)'에서 컴파일러가 어떤 경우 자료형 간의 값을 암시적으로 변환한다는 것을 배웠다. 한 자료형의 값을 더 큰 자료형으로 승격하려면 암시적 형 변환 시스템을 사용해도 좋다.
 
@@ -1847,7 +1914,7 @@ x = x << 1; // x will be 8
 
 
 
-#  25
+# 25
 
 ### priority queue
 
@@ -1861,6 +1928,46 @@ int n = q.top().second.second.second;
 -> 여러개 pair 써본것 
 
 
+
+### 우선순위 큐에 순서 부여하기(vector 도 해당 )
+
+- 보통 기준이 내림차순 / 반대로 하고싶으면 - (마이너스) 를 붙이면 됨 
+
+- compare 구조체를 정의할 수있음 
+
+  - priority_queue<T,vector<T>,compare>  pq;
+
+  ```c++
+  struct compare {
+  	bool operator()(pair<pair<int, int>, int>& a, pair<pair<int, int>, int>& b) {
+  		if (a.first.first == b.first.first) {
+  			return a.second > b.second;
+  		}
+  		return a.first.first > b.first.first;
+  	}
+  }; //구조체를 정의해서 pq에 사용 
+  
+  int main() {
+  	int x, y, z;
+  	priority_queue<pair<pair<int, int>, int>, vector<pair<pair<int, int>, int>>, compare> pq1; //compare쓴 경우
+  	priority_queue<pair<pair<int, int>, int>> pq2;// -마이너스 쓴경우 
+  	vector< pair<pair<int, int>, int> >v1 //compare쓴 경우
+  	vector< pair<pair<int, int>, int> >v2;// -마이너스 쓴경우 
+  	for (int i = 0; i < 4; i++) {
+  		scanf("%d%d%d", &x, &y, &z);
+  		pq1.push({ {x,y},z }); 
+  		pq2.push({ {-x,y},-z });
+  		v1.push_back({ {x,y},z });
+  		v2.push_back({ {-x,y},-z });
+  	}
+  		sort(v1.begin(), v1.end(), greater<>()); //내림차순
+  		sort(v2.begin(), v2.end(), greater<>());
+  	return 0;
+  
+  }
+  ```
+
+  
 
 # 26
 
@@ -2202,7 +2309,6 @@ if (t1 && t1 <= t2) continue;
 ### 마름모 영역 구하기 
 
 ```
-
 	int nexty;
 	int endp;
 
@@ -2228,3 +2334,180 @@ if (t1 && t1 <= t2) continue;
 			//cnt++;
 ```
 
+
+
+# 30
+
+```c++
+vector<pair<pair<int, int>, pair<int, int>>> v;
+
+bool compare(pair<pair<int, int>, pair<int,int>>& a, pair<pair<int, int>, pair<int, int>>& b) {
+	if (a.first.second == b.first.second) {
+			return a.second.second < b.second.second;
+		}
+
+	return a.first.second < b.first.second;
+	
+
+}
+
+
+sort(v.begin(), v.end(), compare);
+```
+
+bool compare 함수를 사용 > pair값을 참조시켜 비교후 리턴 
+
+
+
+# 31
+
+```
+v.erase(unique(v.begin(),v.end()), v.end());
+```
+
+- unique 사용해서 중복값 제거 
+
+
+
+# 32 
+
+```
+struct 구조체이름 {
+    자료형 멤버이름;
+};
+```
+
+예시 > 
+
+1. 구조체 선언 기본 
+
+```c++
+struct Val {
+	int val1;
+	int val2;
+	char val3[20];
+};
+int main(){
+		struct Val v;
+		v.val1 = 2;
+		v.val2 = 5;
+		strcpy(v.val3 , "hello");
+}
+```
+
+2. 정의하는 동시에 선언 
+
+```
+struct Val {
+	int val1;
+	int val2;
+	char val3[20];
+}v;
+int main(){
+		v.val1 = 2;
+		v.val2 = 5;
+		strcpy(v.val3 , "hello");
+}
+```
+
+# 33
+
+아래 함수는 string.h 라이브러리 선언 
+
+#### strlen
+
+문자열 길이 구하기 
+
+-  string 은 사용 불가
+-  NULL이 기준이기 때문에 마지막 \0이 할당안되어 있으면 이상한 값 리턴됨)
+- char* 은 주소저장하는 포인터 > 오류난다. 
+
+```c++
+		char str1[20] = "hello world";
+		printf("%d\n" , strlen(str1));
+```
+
+
+
+
+
+아래 해당 함수로 문자열을 다룰때 string.h 라이브러리를 선언해야 한다.
+
+#### strcpy 
+
+문자열 복사 
+
+#### strncpy
+
+문자열을 일정길이만큼 복사
+
+ 
+
+ex>
+
+```c++
+		char hello[20] = "hello world";
+		char sayHello[20] = "";
+		char sayHello2[2]= "" ;
+	
+		strcpy(sayHello, hello); // hello를 sayHello에 문자열 복사 
+		strncpy(sayHello2, hello, 2);// hello의 2번째 자리까지만 잘라서 복사 
+	
+```
+
+#### strchr
+
+#### strstr
+
+a문자열에서 b문자열 주소 검색후 주소값 반환
+
+```c++
+	char str1[20] = "hello world";
+
+		char* pn1 = NULL;
+		char* pn2 = NULL;
+
+		pn1 = strchr(str1, 'w'); // wrold
+		pn2 = strstr(str1, "or"); //orld
+
+```
+
+
+
+#### strcmp 
+
+문자열 비교 (같은지 다른지 )
+
+strcmp(str1, str2)
+
+
+
+#### 문자열 내림차순 
+
+  sort(answer.begin(),answer.end(),greater<char>());
+
+# 34 
+
+소문자> 대문자 바꾸기 
+
+```c++
+	for (int i = 0; str1[i] != 0; i++) {
+			if (str1[i] >= 'a' && str1[i] <= 'z') {
+				str1[i] = str1[i] - 32;
+			}
+		}
+		printf("%s\n", str1);
+```
+
+# 35
+
+char< > string 
+
+
+
+```c++
+	char str1[20] = "hello World";
+	char str2[20] = "";
+	string str3(str1);  //char> string
+	strcpy(str2, str3.c_str()); // sgring > char
+```
