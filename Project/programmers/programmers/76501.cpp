@@ -1,10 +1,19 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
+#include <string>
+#include <vector>
 
-// absolutes_len은 배열 absolutes의 길이입니다.
-// signs_len은 배열 signs의 길이입니다.
-int solution(int absolutes[], size_t absolutes_len, bool signs[], size_t signs_len) {
+using namespace std;
+
+int solution(vector<int> absolutes, vector<bool> signs) {
     int answer = 123456789;
+    int sum = 0;
+    for (int i = 0; i < signs.size(); i++) {
+        if (signs[i] == true) {
+            sum += absolutes[i];
+        }
+        else {
+            sum -= absolutes[i];
+        }
+    }
+    answer = sum;
     return answer;
 }
